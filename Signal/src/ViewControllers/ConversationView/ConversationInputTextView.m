@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 
         CGFloat cornerRadius = 6.0f;
 
-        self.font = [UIFont ows_dynamicTypeBodyFont];
         self.backgroundColor = [UIColor whiteColor];
         self.layer.borderColor = [UIColor lightGrayColor].CGColor;
         self.layer.borderWidth = 0.5f;

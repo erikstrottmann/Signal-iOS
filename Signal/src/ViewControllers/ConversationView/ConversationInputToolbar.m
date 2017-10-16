@@ -82,6 +82,7 @@ static void *kConversationInputTextViewObservingContext = &kConversationInputTex
 
     _inputTextView = [ConversationInputTextView new];
     self.inputTextView.delegate = self;
+    self.inputTextView.font = [UIFont ows_dynamicTypeBodyFont];
     [self.contentView addSubview:self.inputTextView];
 
     // We want to be permissive about taps on the send and attachment buttons,
@@ -148,6 +149,13 @@ static void *kConversationInputTextViewObservingContext = &kConversationInputTex
     [self addKVOObservers];
 
     [self ensureShouldShowVoiceMemoButton];
+
+    [self ensureContentConstraints];
+}
+
+- (void)updateFontSizes
+{
+    self.inputTextView.font = [UIFont ows_dynamicTypeBodyFont];
 
     [self ensureContentConstraints];
 }
