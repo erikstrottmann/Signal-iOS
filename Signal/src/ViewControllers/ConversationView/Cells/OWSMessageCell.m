@@ -196,7 +196,7 @@ NS_ASSUME_NONNULL_BEGIN
     return self.viewItem.contentSize;
 }
 
-- (void)loadForDisplay:(int)contentWidth
+- (void)loadForDisplay
 {
     OWSAssert(self.viewItem);
     OWSAssert(self.viewItem.interaction);
@@ -209,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
         = isIncoming ? [self.bubbleFactory incoming] : [self.bubbleFactory outgoing];
     self.bubbleImageView.image = bubbleImageData.messageBubbleImage;
 
-    [self updateDateHeader:contentWidth];
+    [self updateDateHeader];
     [self updateFooter];
 
     switch (self.cellType) {
@@ -252,8 +252,10 @@ NS_ASSUME_NONNULL_BEGIN
     //    });
 }
 
-- (void)updateDateHeader:(int)contentWidth
+- (void)updateDateHeader
 {
+    OWSAssert(self.contentWidth > 0);
+
     static NSDateFormatter *dateHeaderDateFormatter = nil;
     static NSDateFormatter *dateHeaderTimeFormatter = nil;
     static dispatch_once_t onceToken;
@@ -301,7 +303,7 @@ NS_ASSUME_NONNULL_BEGIN
         self.dateHeaderConstraints = @[
             // Date headers should be visually centered within the conversation view,
             // so they need to extend outside the cell's boundaries.
-            [self.dateHeaderLabel autoSetDimension:ALDimensionWidth toSize:contentWidth],
+            [self.dateHeaderLabel autoSetDimension:ALDimensionWidth toSize:self.contentWidth],
             (self.isIncoming ? [self.dateHeaderLabel autoPinEdgeToSuperviewEdge:ALEdgeLeading]
                              : [self.dateHeaderLabel autoPinEdgeToSuperviewEdge:ALEdgeTrailing]),
             [self.dateHeaderLabel autoSetDimension:ALDimensionHeight toSize:self.dateHeaderHeight],
