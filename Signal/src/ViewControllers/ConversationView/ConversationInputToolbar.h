@@ -26,9 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)didApproveAttachment:(SignalAttachment *)attachment;
 
-// TODO: Is this necessary.
-//- (void)textViewDidBeginEditing;
-
 @end
 
 #pragma mark -
